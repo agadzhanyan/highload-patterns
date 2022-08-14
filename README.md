@@ -2,6 +2,10 @@
 
 List of patterns to handle high load easily
 
+- [Refresh-ahead caching](./README.md###Worker pool)
+- 
+
+
 ### Refresh-ahead caching
 Caching data in app and update in background
 
@@ -24,3 +28,10 @@ Figure out [example](./singleflight/main.go)
 > curl --location --request GET 'localhost:8890/getBook/100'
 
 ### Worker pool
+
+Preparing worker pool for parallel execution
+
+![Worker pool](pics/worker-pool.png "Worker pool")
+Figure out [example](./worker-pool/main.go)
+
+> curl --location --request GET 'localhost:8890/handle'
