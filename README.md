@@ -2,8 +2,9 @@
 
 List of patterns to handle high load easily
 
-- [Refresh-ahead caching](./README.md###Worker pool)
-- 
+- [Refresh-ahead caching](#refresh-ahead-caching)
+- [Do once, return it to everyone](#do-once-return-it-to-everyone)
+- [Worker pool](#worker-pool)
 
 
 ### Refresh-ahead caching
@@ -18,7 +19,7 @@ curl --location --request GET 'localhost:8890/getPopularMovies'
 
 > More details about caching on [system-design-primer](https://github.com/donnemartin/system-design-primer#refresh-ahead)
 
-### Singleflight
+### Do once, return it to everyone
 
 Making work once by calculating and syncing by work hash
 
@@ -27,7 +28,7 @@ Figure out [example](./singleflight/main.go)
 
 > curl --location --request GET 'localhost:8890/getBook/100'
 
-### Worker pool
+## Worker pool
 
 Preparing worker pool for parallel execution
 
