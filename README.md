@@ -87,6 +87,7 @@ Transfer/sec:      8.16KB
 > docker run --network=multiple-with-lb_backend --rm skandyla/wrk -t3 -c3 -d5s http://ngnix-server:8891/handle
 
 Results
+
 ```shell
 Running 5s test @ http://app:8890/handle
   1 threads and 1 connections
@@ -106,7 +107,6 @@ Running 5s test @ http://app:8890/handle
 Requests/sec:     74.56
 Transfer/sec:      8.16KB
 ```
-
 
 ## Sync to async
 
@@ -149,8 +149,8 @@ Transfer/sec:      3.57KB
 >
 > docker run --network=async_backend --rm skandyla/wrk -t3 -c3 -d5s http://app:8890/handle
 
-
 Results
+
 ```shell
 Running 5s test @ http://app:8890/handle
   1 threads and 1 connections
@@ -213,6 +213,7 @@ Transfer/sec:     47.64KB
 > docker run --network=nosql_backend --rm skandyla/wrk -t3 -c3 -d5s http://app:8890/handle
 
 Results
+
 ```shell
 Running 5s test @ http://app:8890/handle
   1 threads and 1 connections
