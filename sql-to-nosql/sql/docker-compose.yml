@@ -1,0 +1,40 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    ports:
+      - "8831:8890"
+    restart: always
+    networks:
+      - backend
+    depends_on:
+      - postgres
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2000M
+
+  postgres:
+    image: postgres:14.0
+    volumes:
+      - /Users/davidagadzhanyan/go/src/highload-patterns/sql-to-nosql/sql/schema.sql:/docker-entrypoint-initdb.d/10-init.sql
+    networks:
+      - backend
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2000M
+
+networks:
+  backend:

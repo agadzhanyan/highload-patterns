@@ -1,0 +1,65 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ../Dockerfile
+    ports:
+      - "8841:8890"
+    restart: always
+    networks:
+      - backend
+    depends_on:
+      - cassandra
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1000M
+
+  cassandra:
+    image: docker.io/bitnami/cassandra:4.0
+    networks:
+      - backend
+    environment:
+      - CASSANDRA_SEEDS=cassandra
+      - CASSANDRA_CLUSTER_NAME=cassandra-cluster
+      - MAX_HEAP_SIZE=1000M
+      - HEAP_NEWSIZE=1000M
+      - CASSANDRA_PASSWORD_SEEDER=yes
+      - CASSANDRA_PASSWORD=cassandra
+    ports:
+      - 9042:9042
+    volumes:
+      - cassandra_data:/bitnami
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1000M
+
+  #from netflix repo: https://github.com/Netflix/osstracker/blob/master/docker-compose.yml#L67
+  cassandra-load-keyspace:
+    container_name: cassandra-load-keyspace
+    image: cassandra:4.0
+    networks:
+      - backend
+    depends_on:
+      - cassandra
+    volumes:
+      - /Users/davidagadzhanyan/go/src/highload-patterns/sql-to-nosql/nosql/schema.cql:/schema.cql
+    command: /bin/bash -c "sleep 10 && echo loading cassandra keyspace && cqlsh cassandra -u cassandra -p cassandra -f /schema.cql"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 60s
+
+networks:
+  backend:
+
+volumes:
+  cassandra_data:
+    driver: local

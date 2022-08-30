@@ -1,0 +1,59 @@
+version: '3.9'
+
+services:
+  app1:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8881:8890"
+    restart: unless-stopped
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+
+  app2:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8882:8890"
+    restart: unless-stopped
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+
+  app3:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    ports:
+      - "8883:8890"
+    restart: unless-stopped
+    networks:
+      - backend
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 500M
+
+  ngnix-server:
+    image: nginx:latest
+    ports:
+      - "8891:8891"
+    volumes:
+      - /Users/davidagadzhanyan/go/src/highload-patterns/scale-stateless/multiple-with-lb/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - backend
+
+networks:
+  backend:
