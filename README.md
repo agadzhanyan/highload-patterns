@@ -11,7 +11,7 @@ List of patterns to handle high load easily
 
 Articles
 - [Habr: Simple highload patterns in Go](https://habr.com/ru/post/682618/)
-- [Habr: Medium highload patterns in Go](https://habr.com/ru/post/682618/)
+- [Habr: Medium highload patterns in Go](https://habr.com/ru/post/684904/)
 
 
 ### Refresh-ahead caching
