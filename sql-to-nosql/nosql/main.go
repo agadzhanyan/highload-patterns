@@ -14,7 +14,7 @@ import (
 func main() {
 	log.SetOutput(os.Stdout)
 
-	cluster := gocql.NewCluster("cassandra", "cassandra2", "cassandra3")
+	cluster := gocql.NewCluster("cassandra")
 	cluster.Keyspace = "app"
 	cluster.Consistency = gocql.Quorum
 	cluster.ConnectTimeout = time.Second * 10
