@@ -17,6 +17,7 @@ func main() {
 	cluster := gocql.NewCluster("cassandra", "cassandra2", "cassandra3")
 	cluster.Keyspace = "app"
 	cluster.Consistency = gocql.Quorum
+	cluster.ConnectTimeout = time.Second * 10
 	cluster.Authenticator = gocql.PasswordAuthenticator{
 		Username: "cassandra",
 		Password: "cassandra",
